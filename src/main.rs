@@ -16,13 +16,15 @@ fn main() {
 
     let width: usize = match args[1].parse() {
         Ok(num) => num,
-        Err(_) => { eprintln!("Um, {} is not a valid width.", args[1]); process::exit(1); }
+        Err(_) => { eprintln!("Error: {} is not a valid width.", args[1]); process::exit(1); }
     };
 
     let height: usize = match args[2].parse() {
         Ok(num) => num,
-        Err(_) => { eprintln!("Um, {} is not a valid height.", args[2]); process::exit(1); }
+        Err(_) => { eprintln!("Error: {} is not a valid height.", args[2]); process::exit(1); }
     };
+
+    if width == 0 || height == 0 { eprintln!("Error: Maze dimensions must be greater than zero."); process::exit(1); }
 
     // build the grid and initialize
     let mut grid = Grid::build(width, height);
